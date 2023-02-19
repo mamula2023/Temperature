@@ -35,21 +35,25 @@ public class Controller {
 	}
 	
 	@FXML
-	void clear(ActionEvent e)  throws URISyntaxException, IOException{
+	void clear(ActionEvent Event)  throws URISyntaxException, IOException{
 		FirstTF.setText("");
 		SecondTF.setText(""); 
 		
 	
 	}
 	@FXML
-	void convert(ActionEvent e)  throws URISyntaxException, IOException{
+	void convert(ActionEvent Event)  throws URISyntaxException, IOException{
 		String firstUnit = (String) FirstChoiceBox.getValue();
 		String secondUnit = (String) SecondChoiceBox.getValue();
 		
 		String firstNum = FirstTF.getText();
-		
-		String result = Main.handle(firstUnit, secondUnit, firstNum);
-		
+		String result = "";
+		try {
+			result = Main.handle(firstUnit, secondUnit, firstNum);
+		}
+		catch(NumberFormatException e) {
+			Main.addMessage(e.getMessage());
+		}
 		SecondTF.setText(result);
 	}
 	
